@@ -27,7 +27,7 @@ class WeChatAccount(models.Model):
 @receiver(post_save, sender=User)
 def create_wechat_user(sender, instance, created, **kwargs):
     if created:
-        WeChatAccount.objects.create(user=instance, nickname='')
+        WeChatAccount.objects.create(user=instance, nickName='')
 
 class PayOrder(models.Model):
     appId = models.CharField(max_length=32)

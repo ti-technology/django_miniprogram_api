@@ -1,6 +1,6 @@
 from django.conf import settings
 
-if not settings.APPID:
+if not settings.WECHAT_MINIPROGRAM_CONFIG:
     raise Exception
 
 

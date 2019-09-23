@@ -13,4 +13,4 @@ class WeChatAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeChatAccount
         fields = '__all__'
-        write_only_fields = ['unionId', 'openId', 'sessionKey']
+        extra_kwargs = {'openId': {'write_only': True}, 'session_key': {'write_only': True}, 'unionId': {'write_only': True}}
