@@ -12,12 +12,10 @@ Quick start
   
     ```python
     INSTALLED_APPS = [
-        ...
         'miniprogram_api',
         'rest_framework.authtoken',
-        'rest_framework',
-]
-    
+        'rest_framework'
+    ]
     WECHAT_MINIPROGRAM_CONFIG = {
         "APPID": "",
         "SECRET": "",
@@ -27,15 +25,14 @@ Quick start
             "NOTIFICATION_URL": '',
         }
     }
-    
-     REST_FRAMEWORK = {
-          'DEFAULT_PERMISSION_CLASSES': [
-              ...
-              'rest_framework.authentication.BasicAuthentication', # add this
-              'rest_framework.authentication.SessionAuthentication', # add this
-              'rest_framework.authentication.TokenAuthentication', # add this
-          ]
-      }
+    REST_FRAMEWORK = {
+      	'DEFAULT_PERMISSION_CLASSES': [
+            ...
+            'rest_framework.authentication.BasicAuthentication', # add this
+            'rest_framework.authentication.SessionAuthentication', # add this
+            'rest_framework.authentication.TokenAuthentication', # add this
+        ]
+    }
     ```
     
     
