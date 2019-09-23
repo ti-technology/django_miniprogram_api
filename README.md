@@ -1,4 +1,5 @@
-=======================
+![django_miniprogram_api](./LOGO/django_miniprogram_api.png)
+
 Django MiniProgram Auth
 =======================
 
