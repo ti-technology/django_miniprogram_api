@@ -8,13 +8,13 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__),os.pardir)))
 
 setup(
     name='django_miniprogram_api',
-    version='0.0.1',
+    version='1.0.1',
     packages=find_packages(),
     include_package_data=True,
     license='BSD License',
     description='A simple Django app implemented the WeChat miniprogram\'s login, payment and other APIs',
     long_description=README,
-    url='https://www.example.com/',
+    url='https://github.com/TinchyChing/django_miniprogram_api',
     author='Tinchy',
     author_email='tinchy@yeah.net',
     classifiers=[

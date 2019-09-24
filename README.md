@@ -3,13 +3,19 @@
 Django MiniProgram API - Django 微信小程序 API
 ============================================
 
-Django 微信小程序 API 是依赖于 django-rest-framework 制作的restful api，封装了微信小程序的登陆，用户资料更新，Access Token获取，以及支付等一系列操作。为开发者提供微信小程序后台的简便操作。
+Django 微信小程序 API 是依赖于 django-rest-framework 制作的restful api，封装了微信小程序的登陆，用户资料更新，微信小程序支付等一系列操作。为开发者提供微信小程序后台的简便操作。
 
 （完善中，登陆以及用户信息更新已经可以使用）
 
+## 目录
+
+[TOC]
+
 ## 安装
 
-pip install 
+```bash
+pip install django_miniprogram_api
+```
 
 ## 安装依赖
 
@@ -272,3 +278,15 @@ WeChatPay().close_order(
 #### [退款结果通知](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_16&index=10)
 
 #### [拉取订单评价数据](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_17&index=11)
+
+## LICENSE
+
+BSD 3-Clause License
+
+## 开发者
+
+Tinchy：tinchy@yeah.net
+
+## 赞助
+
+![zanshang](/Users/qintianqi/Studio/开源项目/ti_django_wechat_miniprogram/django_miniprogram_api/LOGO/zanshang.png)
