@@ -19,6 +19,7 @@ from django.urls import path, include
 from .views import *
 urlpatterns = [
     url(r'^login/', WeChatLoginAPIView.as_view(), name="login_api"),
-    url(r'^updateUserInfo/', WeChatUserInfoUpdateAPIView.as_view(), name="update_userInfo_api")
+    url(r'^updateUserInfo/', WeChatUserInfoUpdateAPIView.as_view(), name="update_userInfo_api"),
+    url(r'^wechatPayCallback/', PayResultsNotice.as_view(), name="wechat_pay_callback_api")
 
 ]

@@ -30,27 +30,5 @@ def create_wechat_user(sender, instance, created, **kwargs):
         WeChatAccount.objects.create(user=instance, nickName='')
 
 class PayOrder(models.Model):
-    appId = models.CharField(max_length=32)
-    mchId = models.CharField(max_length=32)
-    deviceInfo = models.CharField(max_length=32)
-    nonceStr = models.CharField(max_length=32)
-    sign = models.CharField(max_length=32,null=True)
-    signType = models.CharField(max_length=32)
-    body = models.CharField(max_length=128)
     outTradeNo = models.CharField(max_length=32)
-    totalFee = models.IntegerField()
-    spBillCreateIp = models.CharField(max_length=64)
-    timeStart = models.CharField(max_length=14)
-    timeExpire = models.CharField(max_length=14)
-    notifyUrl = models.CharField(max_length=256)
-    tradeType = models.CharField(max_length=16)
-    openId = models.CharField(max_length=128)
-
-    returnCode = models.CharField(max_length=16,null=True)
-    returnMsg = models.CharField(max_length=128,null=True)
-
-    resultCode = models.CharField(max_length=16,null=True)
-    errCode = models.CharField(max_length=32,null=True)
-    errCodeDesc = models.CharField(max_length=128,null=True)
-
-    prepayId = models.CharField(max_length=64)
+    paid = models.BooleanField(default=False)

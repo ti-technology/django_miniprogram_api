@@ -1,5 +1,8 @@
+import datetime
 import random
 import string
+
+import xmltodict
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 
 from django.contrib.auth.models import User
@@ -9,11 +12,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .wechat_process import WeChatCrypt
+from .wechat_process import WeChatCrypt, WeChatSignHelper, WeChatPay
 from .models import *
 from .constants import *
 from .serializers import *
 from rest_framework import viewsets, generics, views, status
+from rest_framework_xml.parsers import XMLParser
 
 
 # Create your views here.
@@ -118,5 +122,35 @@ class WeChatUserInfoUpdateAPIView(views.APIView):
         return Response({'token': token.key, 'wechat': WeChatAccountSerializer(wechat_user).data}, status=status.HTTP_200_OK)
 
 '''
-Mini Program Payment 
+Mini Program Payment Callback
 '''
+
+class PayResultsNotice(views.APIView):
+    parser_classes = (XMLParser,)
+    IGNORE_FIELDS_PREFIX = ["coupon_type_","coupon_id_","coupon_fee_"]
+    def post(self,request):
+        dataDict = xmltodict.parse(request.body)["xml"] #type:dict
+        sign = WeChatSignHelper(dataDict,settings.WECHAT_MINIPROGRAM_CONFIG['WECHAT_PAY']['KEY']).getSign()
+        if sign != dataDict['sign']:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        keyToBeDelete = []
+        for key in dataDict.keys():
+            for ignorePrefix in self.IGNORE_FIELDS_PREFIX:
+                if ignorePrefix in key:
+                    keyToBeDelete.append(key)
+        for key in keyToBeDelete:
+            del dataDict[key]
+
+        #process timeEnd
+        dataDict['time_end'] = datetime.datetime.strptime(dataDict['time_end'],"%Y%m%d%H%M%S")
+
+        dataDict['out_trade_no'] = dataDict['out_trade_no']
+        # assign order Id
+        preOrder = PayOrder.objects.filter(out_trade_no=dataDict['out_trade_no']).first()
+
+        if preOrder and not preOrder.paid:
+            preOrder.paid = True
+            preOrder.save()
+
+        return Response(data=WeChatPay().dic_to_xml({'return_code':'SUCCESS'}))

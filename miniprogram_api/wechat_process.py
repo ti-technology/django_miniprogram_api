@@ -56,7 +56,7 @@ class WeChatPay:
 
         return salt
 
-    def unified_order(self, open_id, body, car_item, order_id, total_fee, spbill_create_ip):
+    def unified_order(self, open_id, body, order_id, total_fee, spbill_create_ip):
         nonce_str = self.ranstr(16)
         url = 'https://api.mch.weixin.qq.com/pay/unifiedorder'
         payload = {
@@ -69,7 +69,7 @@ class WeChatPay:
             'out_trade_no': str(order_id),
             'spbill_create_ip': spbill_create_ip,
             'trade_type': 'JSAPI',
-            'total_fee': int((total_fee * 60) * 100),
+            'total_fee': int(total_fee),
         }
         sign = WeChatSignHelper(payload, settings.WECHAT_MINIPROGRAM_CONFIG["WECHAT_PAY"]['KEY']).getSign()
         payload['sign'] = sign
@@ -78,19 +78,31 @@ class WeChatPay:
         data = self.xml_to_dict(response.content.decode())
         return data
 
-    def order_query(self, transaction_id):
+    def order_query(self, transaction_id=None, out_trade_no=None):
         url = "https://api.mch.weixin.qq.com/pay/orderquery"
         nonce_str = self.ranstr(8)
-        string_for_sign = "appid=" +self.appId + "&mch_id=" + self.mch_id + "&nonce_str=" + nonce_str + "&transaction_id=" + transaction_id
+        if transaction_id:
+            string_for_sign = "appid=" +self.appId + "&mch_id=" + self.mch_id + "&nonce_str=" + nonce_str + "&transaction_id=" + transaction_id
+        elif out_trade_no:
+            string_for_sign = "appid=" +self.appId + "&mch_id=" + self.mch_id + "&nonce_str=" + nonce_str + "&out_trade_no=" + out_trade_no
         sign = string_for_sign + settings.WECHAT_MINIPROGRAM_CONFIG["WECHAT_PAY"]['KEY']
         sign = str(hashlib.md5(sign.encode())).upper()
-        payload = {
-            'appid': self.appId,
-            'mch_id': self.mch_id,
-            'nonce_str': nonce_str,
-            'sign': sign,
-            'transaction_id': transaction_id
-        }
+        if transaction_id:
+            payload = {
+                'appid': self.appId,
+                'mch_id': self.mch_id,
+                'nonce_str': nonce_str,
+                'sign': sign,
+                'transaction_id': transaction_id
+            }
+        elif out_trade_no:
+            payload = {
+                'appid': self.appId,
+                'mch_id': self.mch_id,
+                'nonce_str': nonce_str,
+                'out_trade_no': out_trade_no,
+                'sign': sign,
+            }
 
         response = requests.post(url, data=payload)
         return response.json()
