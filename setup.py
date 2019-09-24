@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__),os.pardir)))
 
 setup(
     name='django_miniprogram_api',
-    version='1.0.2',
+    version='1.0.3',
     packages=find_packages(),
     include_package_data=True,
     license='BSD License',
@@ -18,6 +18,15 @@ setup(
     url='https://github.com/TinchyChing/django_miniprogram_api',
     author='Tinchy',
     author_email='tinchy@yeah.net',
+    install_requires = [
+        "requests",
+        "pycrypto",
+        "djangorestframework",
+        "xmltodict",
+        "djangorestframework-xml",
+        "Django"
+    ],
+
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',

@@ -21,6 +21,8 @@ djangorestframework==3.10.3
 xmltodict==0.12.0
 djangorestframework-xml==1.4.0
 Django==2.x.x
+requests==2.22.0
+
 ```
 
 快速入门
