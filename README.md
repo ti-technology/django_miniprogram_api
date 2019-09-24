@@ -7,10 +7,6 @@ Django 微信小程序 API 是依赖于 django-rest-framework 制作的restful a
 
 （完善中，登陆以及用户信息更新已经可以使用）
 
-## 目录
-
-[TOC]
-
 ## 安装
 
 ```bash
