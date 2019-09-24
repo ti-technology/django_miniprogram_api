@@ -14,6 +14,7 @@ setup(
     license='BSD License',
     description='A simple Django app implemented the WeChat miniprogram\'s login, payment and other APIs',
     long_description=README,
+    long_description_content_type="text/markdown",
     url='https://github.com/TinchyChing/django_miniprogram_api',
     author='Tinchy',
     author_email='tinchy@yeah.net',
