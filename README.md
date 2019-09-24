@@ -285,4 +285,4 @@ Tinchy：tinchy@yeah.net
 
 ## 赞助
 
-![zanshang](/Users/qintianqi/Studio/开源项目/ti_django_wechat_miniprogram/django_miniprogram_api/LOGO/zanshang.png)
+![zanshang](./LOGO/zanshang.png)
