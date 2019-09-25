@@ -52,6 +52,7 @@ requests==2.22.0
             'rest_framework.authentication.TokenAuthentication', # add this
         ],
       	'DEFAULT_PARSER_CLASSES': (
+   	        'rest_framework.parsers.JSONParser',
             'rest_framework_xml.parsers.XMLParser', 
         ),
     }
