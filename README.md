@@ -5,7 +5,7 @@ Django MiniProgram API - Django 微信小程序 API
 
 Django 微信小程序 API 是依赖于 django-rest-framework 制作的restful api，封装了微信小程序的登陆，用户资料更新，微信小程序支付等一系列操作。为开发者提供微信小程序后台的简便操作。
 
-（完善中，登陆以及用户信息更新已经可以使用）
+（已完成用户登录，更新用户信息，以及微信小程序支付等一部分API,其他功能完善中……）
 
 ## 安装
 
@@ -13,17 +13,6 @@ Django 微信小程序 API 是依赖于 django-rest-framework 制作的restful a
 pip install django_miniprogram_api
 ```
 
-## 安装依赖
-
-```python
-pycrypto==2.6.1
-djangorestframework==3.10.3
-xmltodict==0.12.0
-djangorestframework-xml==1.4.0
-Django==2.x.x
-requests==2.22.0
-
-```
 
 快速入门
 -------
