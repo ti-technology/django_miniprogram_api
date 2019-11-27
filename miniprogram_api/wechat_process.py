@@ -2,6 +2,7 @@ import base64
 import json
 from Crypto.Cipher import AES
 from django.conf import settings
+doc = "https://github.com/ti-technology/django_miniprogram_api"
 
 '''
 WeChat Crypt
@@ -46,6 +47,23 @@ class WeChatPay:
 
 
     def __init__(self):
+        if not settings.WECHAT_MINIPROGRAM_CONFIG.get("WECHAT_PAY", None):
+            raise ValueError(f"Value WECHAT_PAY is required for this mini program, please check the doc {doc}")
+
+        if not settings.WECHAT_MINIPROGRAM_CONFIG.get("WECHAT_PAY").get("MCH_ID",
+                                                                        None) or settings.WECHAT_MINIPROGRAM_CONFIG.get(
+                "WECHAT_PAY").get("MCH_ID", None) == "":
+            raise ValueError(f"Value MCH_ID is required for WECHAT_PAY, please check the doc {doc}")
+
+        if not settings.WECHAT_MINIPROGRAM_CONFIG.get("WECHAT_PAY").get("KEY",
+                                                                        None) or settings.WECHAT_MINIPROGRAM_CONFIG.get(
+                "WECHAT_PAY").get("KEY", None) == "":
+            raise ValueError(f"Value KEY is required for WECHAT_PAY, please check the doc {doc}")
+
+        if not settings.WECHAT_MINIPROGRAM_CONFIG.get("WECHAT_PAY").get("NOTIFICATION_URL",
+                                                                        None) or settings.WECHAT_MINIPROGRAM_CONFIG.get(
+                "WECHAT_PAY").get("NOTIFICATION_URL", None) == "":
+            raise ValueError(f"Value NOTIFICATION_URL is required for WECHAT_PAY, please check the doc {doc}")
         self.appId = settings.WECHAT_MINIPROGRAM_CONFIG['APPID']
         self.secret = settings.WECHAT_MINIPROGRAM_CONFIG['SECRET']
         self.mch_id = settings.WECHAT_MINIPROGRAM_CONFIG["WECHAT_PAY"]['MCH_ID']
